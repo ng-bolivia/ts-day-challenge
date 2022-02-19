@@ -6,28 +6,26 @@ export interface Address {
 }
 
 
-// TODO: La clase Person tiene los siguientes atributos: id, firstName, lastName y address. 👈
 export class Person {
   constructor(
-    protected id: number, // TODO: El id debería permitir almacenar tanto números como cadenas. 👈
+    protected id: number | string,
     protected firstName: string,
     protected lastName: string,
-    protected address: string // TODO: El address debería ser de usar la interfaz Address 👈
+    protected address: Address
   ) {}
 }
 
 
-// TODO: La clase Employee debería heredar de la clase Person. 👈
-export class Employee {
+export class Employee extends Person {
   constructor(
-    id: string, // TODO: El id debería permitir almacenar tanto números como cadenas. 👈
+    id: string | number,
     firstName: string,
     lastName: string,
-    address: null, // TODO: El address debería ser de usar la interfaz Address 👈
+    address: Address,
     private department: string,
     private paymentPerHour: number,
     private workingHours: number,
-    private hireDate: string // TODO: Se debería manejar la fecha como tipo Date y debería ser opcional 👈
+    private hireDate?: Date 
   ) {
     super(id, firstName, lastName, address);
   }
@@ -37,7 +35,7 @@ export class Employee {
     const department = `Department: ${this.department}`;
     const address = this.formatAddress();
     const hireDate = `Hire Date: ${
-      this.hireDate == null ? "-" : this.hireDate.toLocaleString()
+      this.hireDate == null ? "-" : this.hireDate.toLocaleString() // Oye enserio no me corren porque es diferente el time zone o que hice mal?
     }`;
     const seniority = `Seniority: ${this.calculateSeniority()}`;
     const salary = `Salary: ${this.calculateSalary()}`;
