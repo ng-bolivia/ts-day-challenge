@@ -9,27 +9,36 @@ export interface Address {
 // TODO: La clase Person tiene los siguientes atributos: id, firstName, lastName y address. 👈
 export class Person {
   constructor(
-    protected id: number, // TODO: El id debería permitir almacenar tanto números como cadenas. 👈
+    protected id: number | string, // TODO: El id debería permitir almacenar tanto números como cadenas. 👈
     protected firstName: string,
     protected lastName: string,
-    protected address: string // TODO: El address debería ser de usar la interfaz Address 👈
-  ) {}
+    protected address: Address // TODO: El address debería ser de usar la interfaz Address 👈
+  ) {
+    this.id = id;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.address = address;
+  }
 }
 
 
 // TODO: La clase Employee debería heredar de la clase Person. 👈
-export class Employee {
+export class Employee extends Person {
   constructor(
-    id: string, // TODO: El id debería permitir almacenar tanto números como cadenas. 👈
+    id: number | string, // TODO: El id debería permitir almacenar tanto números como cadenas. 👈
     firstName: string,
     lastName: string,
-    address: null, // TODO: El address debería ser de usar la interfaz Address 👈
+    address: Address, // TODO: El address debería ser de usar la interfaz Address 👈
     private department: string,
     private paymentPerHour: number,
     private workingHours: number,
-    private hireDate: string // TODO: Se debería manejar la fecha como tipo Date y debería ser opcional 👈
+    private hireDate?: string | Date | null// TODO: Se debería manejar la fecha como tipo Date y debería ser opcional 👈
   ) {
     super(id, firstName, lastName, address);
+    this.department = department;
+    this.paymentPerHour = paymentPerHour;
+    this.workingHours = workingHours;
+    this.hireDate = hireDate ?? null;
   }
 
   showInfo(): string {
@@ -37,7 +46,7 @@ export class Employee {
     const department = `Department: ${this.department}`;
     const address = this.formatAddress();
     const hireDate = `Hire Date: ${
-      this.hireDate == null ? "-" : this.hireDate.toLocaleString()
+      this.hireDate == null ? "-" : this.hireDate.toLocaleString('en-US', { timeZone: 'America/La_Paz' })
     }`;
     const seniority = `Seniority: ${this.calculateSeniority()}`;
     const salary = `Salary: ${this.calculateSalary()}`;
@@ -67,7 +76,7 @@ export class Employee {
   }
 
   calculateSeniority(): number {
-    if (this.hireDate) {
+    if (this.hireDate && this.hireDate instanceof Date) {
       return new Date().getFullYear() - this.hireDate.getFullYear();
     }
     return 0;
