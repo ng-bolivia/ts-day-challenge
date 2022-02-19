@@ -1,0 +1,19 @@
+name: CI
+on: [push]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+          cache: 'npm'
+      - name: Install dependencies
+        shell: bash
+        run: npm ci
+      - name: Run Unit Test
+        run: npm run test
