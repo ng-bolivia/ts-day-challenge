@@ -9,25 +9,28 @@ export interface Address {
 // TODO: La clase Person tiene los siguientes atributos: id, firstName, lastName y address. 👈
 export class Person {
   constructor(
-    protected id: number, // TODO: El id debería permitir almacenar tanto números como cadenas. 👈
+    protected id: number | string, // TODO: El id debería permitir almacenar tanto números como cadenas. 👈
     protected firstName: string,
     protected lastName: string,
-    protected address: string // TODO: El address debería ser de usar la interfaz Address 👈
+    protected address: Address // TODO: El address debería ser de usar la interfaz Address 👈
   ) {}
 }
 
 
 // TODO: La clase Employee debería heredar de la clase Person. 👈
-export class Employee {
+export class Employee extends Person {
+  street: any;
+  address: any;
+  fullName: any;
   constructor(
-    id: string, // TODO: El id debería permitir almacenar tanto números como cadenas. 👈
+    id: string | number, // TODO: El id debería permitir almacenar tanto números como cadenas. 👈
     firstName: string,
     lastName: string,
-    address: null, // TODO: El address debería ser de usar la interfaz Address 👈
+    address: Address, // TODO: El address debería ser de usar la interfaz Address 👈
     private department: string,
     private paymentPerHour: number,
     private workingHours: number,
-    private hireDate: string // TODO: Se debería manejar la fecha como tipo Date y debería ser opcional 👈
+    private hireDate?: Date // TODO: Se debería manejar la fecha como tipo Date y debería ser opcional 👈
   ) {
     super(id, firstName, lastName, address);
   }
@@ -42,7 +45,7 @@ export class Employee {
     const seniority = `Seniority: ${this.calculateSeniority()}`;
     const salary = `Salary: ${this.calculateSalary()}`;
     return `
-      Employee ${this.id}:
+      Employee:
       ${fullName}
       ${department}
       ${address}
@@ -59,7 +62,7 @@ export class Employee {
   }
 
   displayFullName(): string {
-    return `Name: ${this.firstName} ${this.lastName}`;
+    return `Name: ${this.fullName}`;
   }
 
   calculateSalary(): number {
