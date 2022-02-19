@@ -9,3 +9,5 @@ Tienes que solucionar los errores de tipado del archivo `src/index.ts`, tienes q
 [] El hireDate se debería manejar la fecha como tipo Date y debería ser opcional
 
 Puedes correr pruebas con `npm run test`
+
+Para enviar tú solución debes hacer fork de este proyecto y enviar un PR.
