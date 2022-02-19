@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "prepare": "husky install",
     "compile": "tsc src/index.ts",
     "test": "jest"
   },
@@ -13,6 +14,7 @@
   "devDependencies": {
     "@types/jest": "^27.4.0",
     "babel-jest": "^27.5.1",
+    "husky": "^7.0.4",
     "jest": "^27.5.1",
     "ts-jest": "^27.1.3",
     "ts-node": "^10.5.0",
